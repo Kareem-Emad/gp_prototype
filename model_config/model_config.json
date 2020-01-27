@@ -1,0 +1,6 @@
+{
+    "frames_per_exec": 2,
+    "min_clip_period": 30,
+    "max_clip_period": 60,
+    "threshold": 10
+}

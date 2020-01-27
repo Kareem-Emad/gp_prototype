@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "/home/kareem/projects/gp_prototype/venv/bin/python3.6",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "python.formatting.provider": "yapf"
+}
