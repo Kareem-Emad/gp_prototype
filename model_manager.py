@@ -11,6 +11,7 @@ def load_model(model_file_path='./model_config/model.h5'):
     inputs: model_file_path
     outputs: model loaded object
     """
+
     data = pickle.loads(open('./model_config/encodings_gilfoyle_hog.pickle', "rb").read())
 
     return data
@@ -25,11 +26,13 @@ def execute_model(frame_data, data):
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     rgb = imutils.resize(frame, width=750)
 
+
     # detect the (x, y)-coordinates of the bounding boxes
     # corresponding to each face in the input frame, then compute
     # the facial embeddings for each face
     boxes = face_recognition.face_locations(rgb, model='hog')
     encodings = face_recognition.face_encodings(rgb, boxes)
+
     label = False
     # loop over the facial embeddings
     for encoding in encodings:
@@ -39,6 +42,7 @@ def execute_model(frame_data, data):
         label = True in matches
         if(label):
             break
+
     return label
 
 
