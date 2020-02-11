@@ -21,7 +21,16 @@ class video_processor:
 
     def flush_to_indexer(self):
         if(self.needs_flush()):
-            self.vid_indexer.extract_clips(self.tags_seq)
+            clips = self.vid_indexer.extract_clips(self.tags_seq)
+            self.flush_to_disk(clips)
             self.tags_seq = []
             self.num_flushed += 1
-            # print(f"Flushed Tags to Imaginary Indexer ({self.max_clip_period} seconds)")
+
+    def flush_to_disk(self, clips):
+        starting_frame_index = self.max_clip_period * self.fps * self.num_flushed
+
+        for clip in clips:
+            start_period_frame, end_period_frame = clip
+            start_period_frame, end_period_frame = start_period_frame + starting_frame_index, end_period_frame + starting_frame_index
+            start_period_second, end_period_second = int(start_period_frame / self.fps), int(end_period_frame / self.fps)
+            print(f"Interest Period start between  {start_period_second} and {end_period_second} in video")
