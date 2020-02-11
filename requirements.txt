@@ -3,3 +3,8 @@ ipdb==0.12.3
 opencv-python==4.1.2.30
 numpy==1.18.1
 yapf==0.29.0
+Keras==2.3.1
+tensorflow==1.14.
+requests==2.22.0
+imutils==0.5.3
+face-recognition==1.2.3

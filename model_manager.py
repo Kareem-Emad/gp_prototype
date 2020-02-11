@@ -1,5 +1,8 @@
 import json
-import numpy as np
+import cv2
+import face_recognition
+import imutils
+import pickle
 
 
 def load_model(model_file_path='./model_config/model.h5'):
@@ -8,18 +11,38 @@ def load_model(model_file_path='./model_config/model.h5'):
     inputs: model_file_path
     outputs: model loaded object
     """
-    pass
+    data = pickle.loads(open('./model_config/encodings_gilfoyle_hog.pickle', "rb").read())
+
+    return data
 
 
-def execute_model(frame_data, model):
+def execute_model(frame_data, data):
     """
     User-Defined Function, Called on having frame_data meeting model criteria(1/2/3/.. frame(s))
     inputs: frame_data containing one or more frames as needed by the model specs
     """
-    if(model):
-        return np.random.randint(2)
-    else:
-        return np.random.randint(2)
+    frame = frame_data[0]
+    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    rgb = imutils.resize(frame, width=750)
+
+    # detect the (x, y)-coordinates of the bounding boxes
+    # corresponding to each face in the input frame, then compute
+    # the facial embeddings for each face
+    boxes = face_recognition.face_locations(rgb, model='hog')
+    encodings = face_recognition.face_encodings(rgb, boxes)
+    label = False
+    # loop over the facial embeddings
+    for encoding in encodings:
+        # attempt to match each face in the input image to our known
+        # encodings
+        matches = face_recognition.compare_faces(data["encodings"], encoding)
+        label = True in matches
+        if(label):
+            break
+
+    if(label):
+        print(f"frame label as {label}")
+    return label
 
 
 def load_model_config(model_config_file_path='./model_config/model_config.json'):
