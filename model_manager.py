@@ -39,9 +39,6 @@ def execute_model(frame_data, data):
         label = True in matches
         if(label):
             break
-
-    if(label):
-        print(f"frame label as {label}")
     return label
 
 

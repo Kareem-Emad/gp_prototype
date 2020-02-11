@@ -22,16 +22,14 @@ def parse_source(filename, frames_per_exec, model_obj, vid_processor):
 
     while (video_buffer.isOpened() and processed_frames_count <= total_frames_count):
         ret, frame = video_buffer.read()
-
         print(f'Processing Video {processed_frames_count}/{total_frames_count} frames processed\r', end="")
 
+        frame_buffer.append(frame)
         if (len(frame_buffer) == frames_per_exec):
             vid_processor.process_frames(frame_buffer, model_obj)
             vid_processor.flush_to_indexer()
 
             frame_buffer = []
-        else:
-            frame_buffer.append(frame)
 
         processed_frames_count += 1
 
@@ -60,4 +58,4 @@ def get_frames_count(video_buffer):
 frames_per_exec, min_clip_period, max_clip_period, model_obj = load_model_config()
 vid_processor = video_processor(min_clip_period, max_clip_period, frames_per_exec)
 
-parse_source('Friends_s3Ep01.mp4', frames_per_exec, model_obj, vid_processor) # noqa
+parse_source('mm.mp4', frames_per_exec, model_obj, vid_processor) # noqa
