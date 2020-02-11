@@ -4,4 +4,4 @@ opencv-python==4.1.2.30
 numpy==1.18.1
 yapf==0.29.0
 Keras==2.3.1
-tensorflow==1.14.0
+tensorflow==1.15.2
