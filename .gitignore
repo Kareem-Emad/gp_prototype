@@ -3,3 +3,4 @@ __pycache__
 venv
 model_config/*.pickle
 model_config/*.json
+index_database.json
