@@ -8,3 +8,4 @@ tensorflow==1.15.2
 requests==2.22.0
 imutils==0.5.3
 face-recognition==1.2.3
+moviepy==1.0.1

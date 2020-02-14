@@ -26,7 +26,6 @@ def execute_model(frame_data, data):
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     rgb = imutils.resize(frame, width=750)
 
-
     # detect the (x, y)-coordinates of the bounding boxes
     # corresponding to each face in the input frame, then compute
     # the facial embeddings for each face
